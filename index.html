@@ -1,39 +1,123 @@
 <!doctype html>
 <html>
-  <head>
-    <title>Socket.IO chat</title>
-    <style>
-      * { margin: 0; padding: 0; box-sizing: border-box; }
-      body { font: 13px Helvetica, Arial; }
-      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
-      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
-      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
-      #messages { list-style-type: none; margin: 0; padding: 0; }
-      #messages li { padding: 5px 10px; }
-      #messages li:nth-child(odd) { background: #eee; }
-      #messages { margin-bottom: 40px }
-    </style>
-  </head>
-  <body>
+
+<head>
+  <title>Event Bot</title>
+
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <!-- <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> -->
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font: 13px Helvetica, Arial;
+    }
+
+    form {
+      background: #000;
+      padding: 3px;
+      position: fixed;
+      bottom: 0;
+      width: 51%;
+    }
+
+    form input {
+      border: 0;
+      padding: 10px;
+      width: 90%;
+      /* margin-right: .5%; */
+    }
+
+    form button {
+      width: 9%;
+      background: rgb(130, 224, 255);
+      border: none;
+      padding: 10px;
+    }
+
+    #messages {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      position : relative; bottom:0;
+    }
+
+    #messages li {
+      padding: 5px 10px;
+    }
+
+    #messages li:nth-child(odd) {
+      background: #eee;
+    }
+
+    #messages {
+      margin-bottom: 40px
+    }
+
+    .messagebox {
+      width: 51%;
+      margin-left: 22%;
+      border:1px solid #A9A9A9	;
+      height:650px !important;
+      background: white;
+    }
+
+    .label_header{
+      text-align: center;
+      min-height: 100px !important;
+      background: white !important;
+      padding-top: 39px !important;
+      color: white;
+      border-bottom: 1px solid #A9A9A9	;
+    }
+    body{
+      background:#669999
+    }
+  </style>
+
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"></script>
+</head>
+
+<body>
+
+  <div class="messagebox">
+    <div class="label_header">
+      <!-- <h3 style="color:black; clear:both; float:left">EventBot</h3> -->
+      <!-- <img style="float: left; margin-left: 11px;" width="20%" src="https://inatrix.com/Content/Images/logo/logo-2.svg" width="100%"> -->
+      <img style="float: left; margin-left: 11px;" width="20%" src="http://refixd.com/images/logo/LOGO.png" width="100%">
+      <h3 style="color: black;margin-left: 112px;float: left;">A.I. EventBot</h3>
+      
+      <!-- <h1>iNatrix Event Bot</h1> -->
+    </div>
+    
     <ul id="messages"></ul>
     <form action="">
-      <input id="m" autocomplete="off" /><button>Send</button>
+      <input id="m" autocomplete="off" />
+      <button>Send</button>
     </form>
-    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
-    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-    <script>
-      $(function () {
-        var socket = io();
-        $('form').submit(function(){
-          socket.emit('chat message', $('#m').val());
-          $('#m').val('');
-          return false;
-        });
-        socket.on('chat message', function(msg){
-          $('#messages').append($('<li>').text(msg));
-          window.scrollTo(0, document.body.scrollHeight);
-        });
+  </div>
+  <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+  
+  <script>
+    $(function () {
+      var socket = io();
+      $('form').submit(function () {
+        socket.emit('chat message', $('#m').val());
+        $('#m').val('');
+        return false;
       });
-    </script>
-  </body>
+      socket.on('chat message', function (msg) {
+        $('#messages').append($('<li style="font-size:17px;">').html(msg));
+        window.scrollTo(0, document.body.scrollHeight);
+      });
+    });
+  </script>
+</body>
+
 </html>
